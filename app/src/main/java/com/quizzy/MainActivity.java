@@ -1,12 +1,17 @@
 package com.quizzy;
 
 import android.os.Bundle;
+import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.quizzy.models.MultipleChoiceQuestion;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,5 +25,16 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        LinearLayout rootContainer = findViewById(R.id.root);
+
+        List<String> options = List.of("Android", "iOS", "Windows", "Linux");
+        MultipleChoiceQuestion question = new MultipleChoiceQuestion(
+            "Which operating system is developed by Google?",
+            options,
+            0
+        );
+
+        rootContainer.addView(question.render(this));
     }
 }

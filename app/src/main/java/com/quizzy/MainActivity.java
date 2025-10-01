@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.quizzy.models.DropdownQuestion;
 import com.quizzy.models.ImageChoiceQuestion;
 import com.quizzy.models.MultipleChoiceQuestion;
 import com.quizzy.models.Question;
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 1
         ));
 
-        this.questions.add(new MultipleChoiceQuestion(
+        this.questions.add(new DropdownQuestion(
             "Which programming language is used for Android development?",
             List.of("Swift", "Java", "Python", "C#"),
             1

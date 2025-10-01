@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.quizzy.models.ImageChoiceQuestion;
 import com.quizzy.models.MultipleChoiceQuestion;
 import com.quizzy.models.Question;
 
@@ -89,10 +90,11 @@ public class MainActivity extends AppCompatActivity {
                 0
         ));
 
-        this.questions.add(new MultipleChoiceQuestion(
-            "What does CPU stand for?",
-            List.of("Central Processing Unit", "Computer Personal Unit", "Central Program Unit", "Computer Processing Unit"),
-            0
+        this.questions.add(new ImageChoiceQuestion(
+                "Choose 1 the Android version logos",
+                List.of("iOS", "Android", "Windows", "Linux"),
+                List.of(R.drawable.test_1, R.drawable.test_2, R.drawable.test_1, R.drawable.test_2),
+                1
         ));
 
         this.questions.add(new MultipleChoiceQuestion(

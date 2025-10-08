@@ -3,22 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:padding="16dp">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/questionText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Quiz Game"
-        android:textSize="32sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginBottom="32dp"/>
+        android:layout_marginBottom="16dp"/>
 
-    <Button
-        android:id="@+id/startButton"
-        android:layout_width="wrap_content"
+    <RadioGroup
+        android:id="@+id/optionsGroup"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Comenzar Quiz"
-        android:textSize="18sp"/>
+        android:orientation="vertical"/>
 
 </LinearLayout>

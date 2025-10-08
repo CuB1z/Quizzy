@@ -7,18 +7,18 @@
     android:padding="16dp">
 
     <TextView
+        android:id="@+id/finalScoreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quiz Game"
-        android:textSize="32sp"
+        android:text="Puntuación Final: 0"
+        android:textSize="28sp"
         android:textStyle="bold"
         android:layout_marginBottom="32dp"/>
 
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/restartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Comenzar Quiz"
-        android:textSize="18sp"/>
+        android:text="Jugar de nuevo"/>
 
 </LinearLayout>

@@ -10,7 +10,7 @@
         android:id="@+id/finalScoreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Puntuación Final: 0"
+        android:text="@string/result_score"
         android:textSize="28sp"
         android:textStyle="bold"
         android:layout_marginBottom="32dp"/>
@@ -19,6 +19,6 @@
         android:id="@+id/restartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Jugar de nuevo"/>
+        android:text="@string/result_play_again"/>
 
 </LinearLayout>

@@ -9,7 +9,7 @@
         android:id="@+id/scoreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Puntuación: 0"
+        android:text="@string/quiz_score_value"
         android:textSize="20sp"
         android:textStyle="bold"/>
 
@@ -23,7 +23,7 @@
         android:id="@+id/nextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Siguiente"
+        android:text="@string/quiz_next_button"
         android:enabled="false"/>
 
 </LinearLayout>

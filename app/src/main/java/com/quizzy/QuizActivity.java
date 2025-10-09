@@ -2,6 +2,7 @@ package com.quizzy;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,28 +20,34 @@ import com.quizzy.repositories.QuestionRepository;
 import java.util.List;
 
 public class QuizActivity extends AppCompatActivity {
+    private TextView scoreTextView;
+    private Button nextButton;
+
     private List<Question> questions;
     private int currentQuestionIndex = 0;
     private int score = 0;
-    private TextView scoreTextView;
-    private Button nextButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        scoreTextView = findViewById(R.id.scoreTextView);
-        nextButton = findViewById(R.id.nextButton);
+        // Reference UI elements
+        this.scoreTextView = findViewById(R.id.scoreTextView);
+        this.nextButton = findViewById(R.id.nextButton);
 
-        questions = QuestionRepository.getQuestions();
+        // Load questions
+        this.questions = QuestionRepository.getQuestions();
 
+        // Initialize score display and load the first question
         updateScore();
         loadQuestion();
-
-        nextButton.setOnClickListener(v -> nextQuestion());
     }
 
+    /**
+     * Loads the current question into the fragment container.
+     * If there are no more questions, it finishes the quiz.
+     */
     private void loadQuestion() {
         if (currentQuestionIndex < questions.size()) {
             Question question = questions.get(currentQuestionIndex);
@@ -53,41 +60,65 @@ public class QuizActivity extends AppCompatActivity {
             }
 
             getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragmentContainer, fragment)
-                    .commit();
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .commit();
 
-            nextButton.setEnabled(false);
+            this.nextButton.setEnabled(false);
         } else {
             finishQuiz();
         }
     }
 
+    /**
+     * Called by the question fragments when an answer is selected.
+     *
+     * @param isCorrect True if the selected answer is correct, false otherwise.
+     */
     public void onAnswerSelected(boolean isCorrect) {
+        int POINTS_CORRECT = 3, POINTS_INCORRECT = 2;
+
         if (isCorrect) {
-            score += 3;
-            showMessage("¡Correcto! +3 puntos");
+            score += POINTS_CORRECT;
+            showMessage(getString(R.string.quiz_toast_correct, POINTS_CORRECT));
         } else {
-            score -= 2;
-            showMessage("Incorrecto. -2 puntos");
+            score -= POINTS_INCORRECT;
+            showMessage(getString(R.string.quiz_toast_incorrect, POINTS_INCORRECT));
         }
+
         updateScore();
-        nextButton.setEnabled(true);
+        this.nextButton.setEnabled(true);
     }
 
-    private void nextQuestion() {
+    /**
+     * Called when the "Next" button is clicked.
+     *
+     * @param view The view that was clicked.
+     */
+    public void nextQuestion(View view) {
         currentQuestionIndex++;
         loadQuestion();
     }
 
+    /**
+     * Updates the score display.
+     */
     private void updateScore() {
-        scoreTextView.setText(getString(R.string.quiz_score_value, this.score));
+        this.scoreTextView.setText(getString(R.string.quiz_score_value, this.score));
     }
 
+    /**
+     * Displays a short toast message to the user.
+     *
+     * @param message The message to display.
+     */
     private void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Finishes the quiz and navigates to the ResultActivity.
+     */
     private void finishQuiz() {
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra(Constants.FINAL_SCORE, score);

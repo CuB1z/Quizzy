@@ -18,7 +18,6 @@ public class ResultActivity extends AppCompatActivity {
 
         // Reference UI elements
         TextView scoreText = findViewById(R.id.finalScoreText);
-        Button restartButton = findViewById(R.id.restartButton);
 
         // Get final score from intent and display it
         int finalScore = getIntent().getIntExtra(Constants.FINAL_SCORE, 0);

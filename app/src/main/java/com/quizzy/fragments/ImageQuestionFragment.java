@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import com.quizzy.QuizActivity;
 import com.quizzy.R;
+import com.quizzy.config.Constants;
 import com.quizzy.models.ImageQuestion;
 
 public class ImageQuestionFragment extends Fragment {
@@ -21,7 +22,7 @@ public class ImageQuestionFragment extends Fragment {
     public static ImageQuestionFragment newInstance(ImageQuestion question) {
         ImageQuestionFragment fragment = new ImageQuestionFragment();
         Bundle args = new Bundle();
-        args.putSerializable("question", question);
+        args.putSerializable(Constants.ARG_QUESTION, question);
         fragment.setArguments(args);
         return fragment;
     }
@@ -31,9 +32,9 @@ public class ImageQuestionFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                question = getArguments().getSerializable("question", ImageQuestion.class);
+                question = getArguments().getSerializable(Constants.ARG_QUESTION, ImageQuestion.class);
             } else {
-                question = (ImageQuestion) getArguments().getSerializable("question");
+                question = (ImageQuestion) getArguments().getSerializable(Constants.ARG_QUESTION);
             }
         }
     }

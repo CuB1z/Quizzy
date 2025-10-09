@@ -7,6 +7,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.quizzy.config.Constants;
 import com.quizzy.fragments.ImageQuestionFragment;
 import com.quizzy.fragments.TextQuestionFragment;
 import com.quizzy.models.ImageQuestion;
@@ -31,7 +33,7 @@ public class QuizActivity extends AppCompatActivity {
         scoreTextView = findViewById(R.id.scoreTextView);
         nextButton = findViewById(R.id.nextButton);
 
-        questions = QuestionRepository.getQuestions(this);
+        questions = QuestionRepository.getQuestions();
 
         updateScore();
         loadQuestion();
@@ -79,7 +81,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void updateScore() {
-        scoreTextView.setText("Puntuación: " + score);
+        scoreTextView.setText(getString(R.string.quiz_score_value, this.score));
     }
 
     private void showMessage(String message) {
@@ -88,7 +90,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private void finishQuiz() {
         Intent intent = new Intent(this, ResultActivity.class);
-        intent.putExtra("FINAL_SCORE", score);
+        intent.putExtra(Constants.FINAL_SCORE, score);
         startActivity(intent);
         finish();
     }

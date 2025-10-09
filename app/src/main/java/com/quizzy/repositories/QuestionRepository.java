@@ -1,7 +1,5 @@
 package com.quizzy.repositories;
 
-import android.content.Context;
-
 import com.quizzy.R;
 import com.quizzy.models.ImageQuestion;
 import com.quizzy.models.Question;
@@ -12,7 +10,7 @@ import java.util.List;
 
 public class QuestionRepository {
 
-    public static List<Question> getQuestions(Context context) {
+    public static List<Question> getQuestions() {
         List<Question> questions = new ArrayList<>();
 
         questions.add(new TextQuestion(

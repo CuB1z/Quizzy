@@ -1,6 +1,5 @@
 package com.quizzy.fragments;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,6 @@ import com.quizzy.models.ImageQuestion;
 
 public class ImageQuestionFragment extends Fragment {
     private ImageQuestion question;
-    private RadioGroup optionsGroup;
 
     public static ImageQuestionFragment newInstance(ImageQuestion question) {
         ImageQuestionFragment fragment = new ImageQuestionFragment();
@@ -31,11 +29,7 @@ public class ImageQuestionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                question = getArguments().getSerializable(Constants.ARG_QUESTION, ImageQuestion.class);
-            } else {
-                question = (ImageQuestion) getArguments().getSerializable(Constants.ARG_QUESTION);
-            }
+            this.question = (ImageQuestion) getArguments().getSerializable(Constants.ARG_QUESTION);
         }
     }
 
@@ -45,7 +39,7 @@ public class ImageQuestionFragment extends Fragment {
 
         TextView questionText = view.findViewById(R.id.questionText);
         ImageView questionImage = view.findViewById(R.id.questionImage);
-        optionsGroup = view.findViewById(R.id.optionsGroup);
+        RadioGroup optionsGroup = view.findViewById(R.id.optionsGroup);
 
         if (question != null) {
             questionText.setText(question.getQuestionText());

@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:textSize="18sp"
-        android:text="Texto de la pregunta aquí"
         android:gravity="center" />
 
     <!-- Área cuadrada para las imágenes, usando GridLayout para selección -->

@@ -2,7 +2,8 @@
     <string name="app_name">Quizzy</string>
 
     <!-- Main Activity -->
-    <string name="welcome_message">Welcome to Quizzy!</string>
+    <string name="start_title">Quizzy</string>
+    <string name="start_subtitle">F1 Edition</string>
     <string name="start_quiz">Get Started</string>
 
     <!-- Quiz Activity -->

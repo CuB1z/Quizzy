@@ -27,8 +27,8 @@ public class QuestionRepository {
         questions.add(new ImageQuestion(
             "¿Qué escudería es esta?",
             Arrays.asList("Red Bull Racing", "Ferrari", "Mercedes", "McLaren"),
-            0,
-            R.drawable.ic_launcher_foreground
+            3,
+            R.drawable.mclaren
         ));
 
         return questions;

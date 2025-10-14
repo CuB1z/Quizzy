@@ -12,8 +12,4 @@ public class ImageQuestion extends Question {
 
     public int getImageResId() { return imageResId; }
 
-    @Override
-    public String getType() {
-        return "IMAGE";
-    }
 }

@@ -6,4 +6,8 @@ public class Constants {
 
     // Fragment argument keys
     public static final String ARG_QUESTION = "question";
+
+    // Scoring
+    public static final int QUESTION_VALUE = 3;
+    public static final int ERROR_PENALTY = 2;
 }

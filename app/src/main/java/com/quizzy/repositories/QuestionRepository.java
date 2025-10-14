@@ -9,30 +9,26 @@ import java.util.Arrays;
 import java.util.List;
 
 public class QuestionRepository {
-
     public static List<Question> getQuestions() {
         List<Question> questions = new ArrayList<>();
 
         questions.add(new TextQuestion(
-                "¿Cuál es la capital de España?",
-                Arrays.asList("Madrid", "Barcelona", "Valencia", "Sevilla"),
-                0,
-                3
+            "¿Quién ganó el Campeonato Mundial de F1 en 2023?",
+            Arrays.asList("Max Verstappen", "Lewis Hamilton", "Charles Leclerc", "Fernando Alonso"),
+            0
         ));
 
         questions.add(new TextQuestion(
-                "¿En qué año llegó el hombre a la Luna?",
-                Arrays.asList("1967", "1968", "1969", "1970"),
-                2,
-                3
+            "¿En qué año Michael Schumacher ganó su primer campeonato mundial?",
+            Arrays.asList("1993", "1994", "1995", "1996"),
+            1
         ));
 
         questions.add(new ImageQuestion(
-                "¿Qué película es esta?",
-                Arrays.asList("Inception", "Interstellar", "The Matrix", "Avatar"),
-                0,
-                3,
-                R.drawable.ic_launcher_foreground
+            "¿Qué escudería es esta?",
+            Arrays.asList("Red Bull Racing", "Ferrari", "Mercedes", "McLaren"),
+            0,
+            R.drawable.ic_launcher_foreground
         ));
 
         return questions;

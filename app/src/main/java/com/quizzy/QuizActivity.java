@@ -76,14 +76,13 @@ public class QuizActivity extends AppCompatActivity {
      * @param isCorrect True if the selected answer is correct, false otherwise.
      */
     public void onAnswerSelected(boolean isCorrect) {
-        int POINTS_CORRECT = 3, POINTS_INCORRECT = 2;
 
         if (isCorrect) {
-            score += POINTS_CORRECT;
-            showMessage(getString(R.string.quiz_toast_correct, POINTS_CORRECT));
+            score += Constants.QUESTION_VALUE;
+            showMessage(getString(R.string.quiz_toast_correct, Constants.QUESTION_VALUE));
         } else {
-            score -= POINTS_INCORRECT;
-            showMessage(getString(R.string.quiz_toast_incorrect, POINTS_INCORRECT));
+            score -= Constants.ERROR_PENALTY;
+            showMessage(getString(R.string.quiz_toast_incorrect, Constants.ERROR_PENALTY));
         }
 
         updateScore();

@@ -3,10 +3,10 @@ package com.quizzy.models;
 import java.util.List;
 
 public class ImageQuestion extends Question {
-    private int imageResId;
+    private final int imageResId;
 
-    public ImageQuestion(String questionText, List<String> options, int correctOptionIndex, int value, int imageResId) {
-        super(questionText, options, correctOptionIndex, value);
+    public ImageQuestion(String questionText, List<String> options, int correctOptionIndex, int imageResId) {
+        super(questionText, options, correctOptionIndex);
         this.imageResId = imageResId;
     }
 

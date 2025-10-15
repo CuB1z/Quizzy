@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.quizzy.QuizActivity;
 import com.quizzy.R;
 import com.quizzy.config.Constants;
 import com.quizzy.models.ImageAnswerQuestion;
@@ -39,7 +41,7 @@ public class ImageAnswerQuestionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_image_answer_question, container, false);
 
         TextView questionText = view.findViewById(R.id.questionTextView);
-        List<ImageView> imageViews = List.of(
+        List<ImageButton> imageButtons = List.of(
                 view.findViewById(R.id.image1),
                 view.findViewById(R.id.image2),
                 view.findViewById(R.id.image3),
@@ -52,14 +54,22 @@ public class ImageAnswerQuestionFragment extends Fragment {
 
             questionText.setText(question.getQuestionText());
 
-            for (int i = 0; i < imageViews.size(); i++) {
-                ImageView answerImageView = imageViews.get(i);
+            for (int i = 0; i < imageButtons.size(); i++) {
+                ImageButton answerImageButton = imageButtons.get(i);
 
                 if (i < imageResources.size()) {
-                    answerImageView.setImageResource(imageResources.get(i));
-                    answerImageView.setContentDescription(imageDescriptions.get(i));
+                    final int index = i; // Variable final para usar en el lambda
+                    answerImageButton.setImageResource(imageResources.get(i));
+                    answerImageButton.setContentDescription(imageDescriptions.get(i));
+                    answerImageButton.setOnClickListener(v -> {
+                        boolean isCorrect = index == question.getCorrectOptionIndex();
+                        ((QuizActivity) getActivity()).onAnswerSelected(isCorrect);
+                        for (ImageButton button : imageButtons) {
+                            button.setEnabled(false);
+                        }
+                    });
                 } else {
-                    answerImageView.setVisibility(View.GONE);
+                    answerImageButton.setVisibility(View.GONE);
                 }
             }
         }

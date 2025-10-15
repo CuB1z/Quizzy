@@ -1,25 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:lottie_fileName="finish_flags.json"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/finalScoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/result_text"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp"/>
+
     <TextView
         android:id="@+id/finalScoreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/result_score"
-        android:textSize="28sp"
+        android:textSize="50sp"
         android:textStyle="bold"
         android:layout_marginBottom="32dp"/>
 
     <Button
         android:id="@+id/restartButton"
+        style="@style/AppButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/result_play_again"
-        android:onClick="restartGame"/>
+        android:onClick="restartGame"
+        android:text="@string/result_play_again" />
 
 </LinearLayout>
+

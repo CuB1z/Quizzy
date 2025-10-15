@@ -1,6 +1,7 @@
 package com.quizzy.repositories;
 
 import com.quizzy.R;
+import com.quizzy.models.ImageAnswerQuestion;
 import com.quizzy.models.ImageQuestion;
 import com.quizzy.models.Question;
 import com.quizzy.models.TextQuestion;
@@ -29,6 +30,13 @@ public class QuestionRepository {
             Arrays.asList("Red Bull Racing", "Ferrari", "Mercedes", "McLaren"),
             3,
             R.drawable.mclaren
+        ));
+
+        questions.add(new ImageAnswerQuestion(
+            "¿Quién es Niki Lauda?",
+            Arrays.asList("piloto_1", "piloto_2", "piloto_3", "piloto_4"),
+            0,
+            Arrays.asList(R.drawable.niki_lauda, R.drawable.james_hunt, R.drawable.ayrton_senna, R.drawable.michael_schumacher)
         ));
 
         return questions;

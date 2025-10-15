@@ -10,8 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.quizzy.config.Constants;
+import com.quizzy.fragments.ImageAnswerQuestionFragment;
 import com.quizzy.fragments.ImageQuestionFragment;
 import com.quizzy.fragments.TextQuestionFragment;
+import com.quizzy.models.ImageAnswerQuestion;
 import com.quizzy.models.ImageQuestion;
 import com.quizzy.models.Question;
 import com.quizzy.models.TextQuestion;
@@ -55,8 +57,12 @@ public class QuizActivity extends AppCompatActivity {
 
             if (question instanceof ImageQuestion) {
                 fragment = ImageQuestionFragment.newInstance((ImageQuestion) question);
-            } else {
+            } else if (question instanceof TextQuestion) {
                 fragment = TextQuestionFragment.newInstance((TextQuestion) question);
+            } else if (question instanceof ImageAnswerQuestion) {
+                fragment = ImageAnswerQuestionFragment.newInstance((ImageAnswerQuestion) question);
+            } else {
+                throw new IllegalArgumentException("Unknown question type");
             }
 
             getSupportFragmentManager()

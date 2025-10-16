@@ -8,11 +8,16 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import com.quizzy.QuizActivity;
 import com.quizzy.R;
 import com.quizzy.config.Constants;
 import com.quizzy.models.ImageQuestion;
+
+import java.util.List;
+import java.util.Objects;
 
 public class ImageQuestionFragment extends Fragment {
     private ImageQuestion question;
@@ -45,16 +50,34 @@ public class ImageQuestionFragment extends Fragment {
             questionText.setText(question.getQuestionText());
             questionImage.setImageResource(question.getImageResId());
 
-            for (int i = 0; i < question.getOptions().size(); i++) {
+            List<String> options = this.question.getOptions();
+
+            if (getContext() == null) {
+                return view;
+            }
+
+            for (int i = 0; i < options.size(); i++) {
                 RadioButton radioButton = new RadioButton(getContext());
-                radioButton.setText(question.getOptions().get(i));
+                radioButton.setText(options.get(i));
                 radioButton.setId(i);
+                radioButton.setButtonDrawable(null);
+                radioButton.setBackground(
+                        ContextCompat.getDrawable(getContext(), R.drawable.radio_button_selector)
+                );
+
+                RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(
+                        RadioGroup.LayoutParams.MATCH_PARENT,
+                        RadioGroup.LayoutParams.WRAP_CONTENT
+                );
+                params.setMargins(0, 0, 0, 32);
+                radioButton.setLayoutParams(params);
+                radioButton.setPadding(32, 32, 32, 32);
                 optionsGroup.addView(radioButton);
             }
 
             optionsGroup.setOnCheckedChangeListener((group, checkedId) -> {
                 boolean isCorrect = checkedId == question.getCorrectOptionIndex();
-                ((QuizActivity) getActivity()).onAnswerSelected(isCorrect);
+                ((QuizActivity) requireActivity()).onAnswerSelected(isCorrect);
                 for (int i = 0; i < optionsGroup.getChildCount(); i++) {
                     optionsGroup.getChildAt(i).setEnabled(false);
                 }

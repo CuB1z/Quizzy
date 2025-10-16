@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import com.quizzy.QuizActivity;
 import com.quizzy.R;
@@ -52,6 +54,18 @@ public class TextQuestionFragment extends Fragment {
                 RadioButton radioButton = new RadioButton(getContext());
                 radioButton.setText(options.get(i));
                 radioButton.setId(i);
+                radioButton.setButtonDrawable(null);
+                radioButton.setBackground(
+                    ContextCompat.getDrawable(getContext(), R.drawable.radio_button_selector)
+                );
+
+                RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(
+                    RadioGroup.LayoutParams.MATCH_PARENT,
+                    RadioGroup.LayoutParams.WRAP_CONTENT
+                );
+                params.setMargins(0, 0, 0, 32);
+                radioButton.setLayoutParams(params);
+                radioButton.setPadding(32, 32, 32, 32);
                 optionsGroup.addView(radioButton);
             }
 

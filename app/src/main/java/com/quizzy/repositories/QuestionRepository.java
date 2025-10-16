@@ -12,7 +12,6 @@ import java.util.List;
 public class QuestionRepository {
     public static List<Question> getQuestions() {
         List<Question> questions = new ArrayList<>();
-
         questions.add(new TextQuestion(
             "¿Quién ganó el Campeonato Mundial de F1 en 2023?",
             Arrays.asList("Max Verstappen", "Lewis Hamilton", "Charles Leclerc", "Fernando Alonso"),

@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="18dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -44,6 +44,15 @@
             android:textSize="48sp"
             android:textStyle="bold" />
     </LinearLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        app:lottie_fileName="racing_car.json"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/startButton"

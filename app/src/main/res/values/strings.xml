@@ -8,7 +8,7 @@
 
     <!-- Quiz Activity -->
     <string name="quiz_next_button">Next</string>
-    <string name="quiz_score_value">Score: %1$d</string>
+    <string name="quiz_score_value">%1$d points</string>
     <string name="quiz_toast_correct">Correct! +%1$d points</string>
     <string name="quiz_toast_incorrect">Incorrect! -%1$d points</string>
 

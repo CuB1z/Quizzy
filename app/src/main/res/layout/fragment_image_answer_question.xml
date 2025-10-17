@@ -10,8 +10,10 @@
         android:id="@+id/questionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:textSize="18sp"
+        android:layout_marginBottom="16dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <GridLayout
@@ -20,8 +22,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:columnCount="2"
-        android:rowCount="2"
-        android:layout_margin="16dp">
+        android:rowCount="2">
 
         <ImageButton
             android:id="@+id/image1"

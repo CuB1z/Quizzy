@@ -89,10 +89,10 @@ public class QuizActivity extends AppCompatActivity {
 
         if (isCorrect) {
             score += Constants.QUESTION_VALUE;
-            showMessage(getString(R.string.quiz_toast_correct, Constants.QUESTION_VALUE));
+            showMessage(getString(R.string.quiz_toast_correct, Constants.QUESTION_VALUE), true);
         } else {
             score -= Constants.ERROR_PENALTY;
-            showMessage(getString(R.string.quiz_toast_incorrect, Constants.ERROR_PENALTY));
+            showMessage(getString(R.string.quiz_toast_incorrect, Constants.ERROR_PENALTY), false);
         }
 
         updateScore();
@@ -120,9 +120,25 @@ public class QuizActivity extends AppCompatActivity {
      * Displays a short toast message to the user.
      *
      * @param message The message to display.
+     * @param correct True if the message is for a correct answer, false for incorrect.
      */
-    private void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    private void showMessage(String message, boolean correct) {
+        View layout = getLayoutInflater().inflate(R.layout.custom_toast, null, false);
+        TextView toastView = layout.findViewById(R.id.toast);
+
+        toastView.setText(message);
+        int iconRes = correct ? R.drawable.ic_check : R.drawable.ic_cross;
+
+        // Set compound drawable at runtime
+        toastView.setCompoundDrawablesRelativeWithIntrinsicBounds(iconRes, 0, 0, 0);
+
+        Toast toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
+        toast.setView(layout);
+
+        // Position toast at top-right corner
+        toast.setGravity(android.view.Gravity.TOP | android.view.Gravity.END, 32, -16);
+
+        toast.show();
     }
 
     /**

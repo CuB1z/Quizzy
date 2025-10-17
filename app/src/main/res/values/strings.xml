@@ -9,8 +9,8 @@
     <!-- Quiz Activity -->
     <string name="quiz_next_button">Next</string>
     <string name="quiz_score_value">%1$d points</string>
-    <string name="quiz_toast_correct">Correct! +%1$d points</string>
-    <string name="quiz_toast_incorrect">Incorrect! -%1$d points</string>
+    <string name="quiz_toast_correct">+%1$d points</string>
+    <string name="quiz_toast_incorrect">-%1$d points</string>
 
     <!-- Result Activity -->
     <string name="result_text">Final Score</string>

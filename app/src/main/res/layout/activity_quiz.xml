@@ -51,13 +51,34 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/nextButton"
-        style="@style/AppButton"
+    <LinearLayout
+        android:id="@+id/buttonsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:enabled="false"
-        android:onClick="nextQuestion"
-        android:text="@string/quiz_next_button" />
+        android:layout_marginBottom="24dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/restartButton"
+            style="@style/AppButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:layout_weight="1"
+            android:onClick="restartGame"
+            android:text="@string/quiz_restart_button" />
+
+        <Button
+            android:id="@+id/nextButton"
+            style="@style/AppButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:onClick="nextQuestion"
+            android:text="@string/quiz_next_button" />
+
+    </LinearLayout>
 
 </LinearLayout>

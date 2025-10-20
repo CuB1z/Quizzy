@@ -8,6 +8,7 @@
 
     <!-- Quiz Activity -->
     <string name="quiz_next_button">Siguiente</string>
+    <string name="quiz_restart_button">Reiniciar</string>
     <string name="quiz_score_value">%1$d puntos</string>
     <string name="quiz_toast_correct">+%1$d puntos</string>
     <string name="quiz_toast_incorrect">-%1$d puntos</string>
@@ -16,8 +17,6 @@
     <string name="result_text">Puntuación Final</string>
     <string name="result_score">%1$d</string>
     <string name="result_play_again">Jugar de nuevo</string>
-
-
 
     <!-- Quiz Fragment -->
     <string name="question_image_description">Imagen de la pregunta</string>

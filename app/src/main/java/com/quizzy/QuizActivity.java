@@ -110,6 +110,17 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     /**
+     * Called when the "Restart" button is clicked.
+     *
+     * @param view The view that was clicked.
+     */
+    public void restartGame(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    /**
      * Updates the score display.
      */
     private void updateScore() {

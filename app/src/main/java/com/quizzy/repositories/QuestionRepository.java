@@ -4,6 +4,7 @@ import com.quizzy.R;
 import com.quizzy.models.ImageAnswerQuestion;
 import com.quizzy.models.ImageQuestion;
 import com.quizzy.models.Question;
+import com.quizzy.models.SpinnerAnswerQuestion;
 import com.quizzy.models.TextQuestion;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +18,13 @@ public class QuestionRepository {
             Arrays.asList("Max Verstappen", "Lewis Hamilton", "Charles Leclerc", "Fernando Alonso"),
             0
         ));
+
+        questions.add(new SpinnerAnswerQuestion(
+            "¿Cuál de estos pilotos NO ha ganado un campeonato mundial de F1?",
+            Arrays.asList("Sebastian Vettel", "Nico Rosberg", "Mark Webber", "Kimi Räikkönen"),
+            2
+        ));
+
 
         questions.add(new TextQuestion(
             "¿En qué año Michael Schumacher ganó su primer campeonato mundial?",

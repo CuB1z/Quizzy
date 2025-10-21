@@ -62,7 +62,11 @@ public class ImageAnswerQuestionFragment extends Fragment {
                     answerImageButton.setContentDescription(imageDescriptions.get(i));
                     answerImageButton.setOnClickListener(v -> {
                         boolean isCorrect = index == question.getCorrectOptionIndex();
-                        ((QuizActivity) getActivity()).onAnswerSelected(isCorrect);
+                        QuizActivity activity = (QuizActivity) getActivity();
+
+                        if (activity != null) {
+                            activity.onAnswerSelected(isCorrect);
+                        }
                         for (ImageButton button : imageButtons) {
                             button.setEnabled(false);
 

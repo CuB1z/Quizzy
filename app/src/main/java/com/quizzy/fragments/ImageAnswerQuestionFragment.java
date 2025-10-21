@@ -57,7 +57,7 @@ public class ImageAnswerQuestionFragment extends Fragment {
                 ImageButton answerImageButton = imageButtons.get(i);
 
                 if (i < imageResources.size()) {
-                    final int index = i; // Variable final para usar en el lambda
+                    final int index = i;
                     answerImageButton.setImageResource(imageResources.get(i));
                     answerImageButton.setContentDescription(imageDescriptions.get(i));
                     answerImageButton.setOnClickListener(v -> {

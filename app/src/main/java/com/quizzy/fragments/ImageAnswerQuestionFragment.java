@@ -66,6 +66,10 @@ public class ImageAnswerQuestionFragment extends Fragment {
                         ((QuizActivity) getActivity()).onAnswerSelected(isCorrect);
                         for (ImageButton button : imageButtons) {
                             button.setEnabled(false);
+
+                            if (button != answerImageButton) {
+                                button.setAlpha(0.4f);
+                            }
                         }
                     });
                 } else {

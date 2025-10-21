@@ -1,5 +1,6 @@
 package com.quizzy;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -28,8 +29,9 @@ public class ResultActivity extends AppCompatActivity {
      * Called when the restart button is clicked. Restarts the quiz.
      */
     public void restartGame(View view) {
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(ResultActivity.this, QuizActivity.class);
-        startActivity(intent);
+        startActivity(intent, options.toBundle());
         finish();
     }
 }

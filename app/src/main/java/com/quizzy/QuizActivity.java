@@ -1,5 +1,6 @@
 package com.quizzy;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -115,8 +116,9 @@ public class QuizActivity extends AppCompatActivity {
      * @param view The view that was clicked.
      */
     public void restartGame(View view) {
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        startActivity(intent, options.toBundle());
         finish();
     }
 
@@ -156,9 +158,10 @@ public class QuizActivity extends AppCompatActivity {
      * Finishes the quiz and navigates to the ResultActivity.
      */
     private void finishQuiz() {
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra(Constants.FINAL_SCORE, score);
-        startActivity(intent);
+        startActivity(intent, options.toBundle());
         finish();
     }
 }

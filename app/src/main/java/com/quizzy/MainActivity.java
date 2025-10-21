@@ -1,5 +1,6 @@
 package com.quizzy;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -14,8 +15,9 @@ public class MainActivity extends AppCompatActivity {
 
         Button startButton = findViewById(R.id.startButton);
         startButton.setOnClickListener(v -> {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
             Intent intent = new Intent(MainActivity.this, QuizActivity.class);
-            startActivity(intent);
+            startActivity(intent, options.toBundle());
         });
     }
 }

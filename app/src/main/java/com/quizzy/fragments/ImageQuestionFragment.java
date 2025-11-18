@@ -17,7 +17,6 @@ import com.quizzy.config.Constants;
 import com.quizzy.models.ImageQuestion;
 
 import java.util.List;
-import java.util.Objects;
 
 public class ImageQuestionFragment extends Fragment {
     private ImageQuestion question;

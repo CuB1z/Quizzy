@@ -56,7 +56,7 @@ public class TextQuestionFragment extends Fragment {
                 radioButton.setId(i);
                 radioButton.setButtonDrawable(null);
                 radioButton.setBackground(
-                    ContextCompat.getDrawable(getContext(), R.drawable.radio_button_selector)
+                    ContextCompat.getDrawable(requireContext(), R.drawable.radio_button_selector)
                 );
 
                 RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(
@@ -71,7 +71,7 @@ public class TextQuestionFragment extends Fragment {
 
             optionsGroup.setOnCheckedChangeListener((group, checkedId) -> {
                 boolean isCorrect = checkedId == this.question.getCorrectOptionIndex();
-                ((QuizActivity) getActivity()).onAnswerSelected(isCorrect);
+                ((QuizActivity) requireActivity()).onAnswerSelected(isCorrect);
                 for (int i = 0; i < optionsGroup.getChildCount(); i++) {
                     optionsGroup.getChildAt(i).setEnabled(false);
                 }

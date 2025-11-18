@@ -4,11 +4,11 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.quizzy.config.Constants;
+import com.quizzy.repositories.SQLiteService;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -20,8 +20,13 @@ public class ResultActivity extends AppCompatActivity {
         // Reference UI elements
         TextView scoreText = findViewById(R.id.finalScoreText);
 
+        SQLiteService sqLiteService = new SQLiteService(this);
+
         // Get final score from intent and display it
         int finalScore = getIntent().getIntExtra(Constants.FINAL_SCORE, 0);
+        int maxScore = sqLiteService.getMaxScore();
+        System.out.println("Max Score from DB: " + maxScore);
+
         scoreText.setText(getString(R.string.result_score, finalScore));
     }
 

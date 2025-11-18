@@ -8,4 +8,8 @@ public class TextQuestion extends Question {
         super(questionText, options, correctOptionIndex);
     }
 
+    @Override
+    public String getType() {
+        return "TEXT";
+    }
 }

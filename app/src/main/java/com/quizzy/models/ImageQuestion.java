@@ -10,6 +10,11 @@ public class ImageQuestion extends Question {
         this.imageResId = imageResId;
     }
 
+    @Override
+    public String getType() {
+        return "IMAGE";
+    }
+
     public int getImageResId() { return imageResId; }
 
 }

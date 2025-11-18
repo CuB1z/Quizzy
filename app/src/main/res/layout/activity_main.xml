@@ -61,6 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/start_quiz"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:onClick="onStart"/>
 
 </LinearLayout>

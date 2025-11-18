@@ -1,5 +1,6 @@
 package com.quizzy;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,14 +22,22 @@ import com.quizzy.models.Question;
 import com.quizzy.models.SpinnerAnswerQuestion;
 import com.quizzy.models.TextQuestion;
 import com.quizzy.repositories.QuestionRepository;
+import com.quizzy.repositories.SQLiteService;
+import com.quizzy.utils.RandomUtils;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class QuizActivity extends AppCompatActivity {
+    private final int MAX_QUESTIONS = QuestionRepository.MAX_QUESTIONS;
+
     private TextView scoreTextView;
     private Button nextButton;
 
-    private List<Question> questions;
+    private SQLiteService sqliteService;
+    private long questionCount;
+    private final Set<Integer> askedQuestionIds = new HashSet<>();
+
     private int currentQuestionIndex = 0;
     private int score = 0;
 
@@ -41,10 +50,12 @@ public class QuizActivity extends AppCompatActivity {
         this.scoreTextView = findViewById(R.id.scoreTextView);
         this.nextButton = findViewById(R.id.nextButton);
 
-        // Load questions
-        this.questions = QuestionRepository.getQuestions();
-
-        // Initialize score display and load the first question
+        this.sqliteService = new SQLiteService(this);
+        this.questionCount = this.sqliteService.getQuestionCount();
+        if (this.questionCount <= 0) {
+            this.sqliteService.insertBatchQuestions(QuestionRepository.getQuestions());
+            this.questionCount = this.sqliteService.getQuestionCount();
+        }
         updateScore();
         loadQuestion();
     }
@@ -54,18 +65,26 @@ public class QuizActivity extends AppCompatActivity {
      * If there are no more questions, it finishes the quiz.
      */
     private void loadQuestion() {
-        if (currentQuestionIndex < questions.size()) {
-            Question question = questions.get(currentQuestionIndex);
+        if (currentQuestionIndex < MAX_QUESTIONS - 1) {
+            Question randomQuestion = null;
+            int questionId = -1;
+            while (randomQuestion == null || this.askedQuestionIds.contains(questionId)) {
+                questionId = RandomUtils.getRandomInt(0, (int) this.questionCount - 1);
+                randomQuestion = this.sqliteService.getQuestionById(questionId);
+            }
+
+            this.askedQuestionIds.add(questionId);
+
             Fragment fragment;
 
-            if (question instanceof ImageQuestion) {
-                fragment = ImageQuestionFragment.newInstance((ImageQuestion) question);
-            } else if (question instanceof TextQuestion) {
-                fragment = TextQuestionFragment.newInstance((TextQuestion) question);
-            } else if (question instanceof ImageAnswerQuestion) {
-                fragment = ImageAnswerQuestionFragment.newInstance((ImageAnswerQuestion) question);
-            } else  if (question instanceof SpinnerAnswerQuestion) {
-                fragment = SpinnerAnswerQuestionFragment.newInstance((SpinnerAnswerQuestion) question);
+            if (randomQuestion instanceof ImageQuestion) {
+                fragment = ImageQuestionFragment.newInstance((ImageQuestion) randomQuestion);
+            } else if (randomQuestion instanceof TextQuestion) {
+                fragment = TextQuestionFragment.newInstance((TextQuestion) randomQuestion);
+            } else if (randomQuestion instanceof ImageAnswerQuestion) {
+                fragment = ImageAnswerQuestionFragment.newInstance((ImageAnswerQuestion) randomQuestion);
+            } else  if (randomQuestion instanceof SpinnerAnswerQuestion) {
+                fragment = SpinnerAnswerQuestionFragment.newInstance((SpinnerAnswerQuestion) randomQuestion);
             } else {
                 throw new IllegalArgumentException("Unknown question type");
             }
@@ -136,7 +155,9 @@ public class QuizActivity extends AppCompatActivity {
      * @param correct True if the message is for a correct answer, false for incorrect.
      */
     private void showMessage(String message, boolean correct) {
+        @SuppressLint("InflateParams")
         View layout = getLayoutInflater().inflate(R.layout.custom_toast, null, false);
+
         TextView toastView = layout.findViewById(R.id.toast);
 
         toastView.setText(message);
@@ -158,6 +179,8 @@ public class QuizActivity extends AppCompatActivity {
      * Finishes the quiz and navigates to the ResultActivity.
      */
     private void finishQuiz() {
+        this.sqliteService.insertScore(score);
+
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra(Constants.FINAL_SCORE, score);

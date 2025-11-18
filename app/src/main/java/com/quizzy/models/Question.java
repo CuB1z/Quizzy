@@ -18,4 +18,5 @@ public abstract class Question implements Serializable {
     public List<String> getOptions() { return options; }
     public int getCorrectOptionIndex() { return correctOptionIndex; }
 
+    public abstract String getType();
 }

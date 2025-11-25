@@ -5,17 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.quizzy.config.Constants;
 import com.quizzy.repositories.SQLiteService;
 
-public class ResultActivity extends AppCompatActivity {
+public class ResultActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
+        setActivityContent(R.layout.activity_result);
 
         // Reference UI elements
         TextView scoreText = findViewById(R.id.finalScoreText);

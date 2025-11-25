@@ -22,10 +22,9 @@ public class MainActivity extends BaseActivity {
         startActivity(intent, options.toBundle());
     }
 
-    public void HelpClick(View view) {
+    public void helpClick(View view) {
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(MainActivity.this, HelpActivity.class);
         startActivity(intent, options.toBundle());
     }
-
 }

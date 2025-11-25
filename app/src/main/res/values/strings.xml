@@ -5,7 +5,7 @@
     <string name="start_title">Quizzy</string>
     <string name="start_subtitle">F1 Edition</string>
     <string name="start_quiz">Comenzar</string>
-    <string name="help_button">Ayuda</string>">
+    <string name="help_button">Ayuda</string>
 
     <!-- Quiz Activity -->
     <string name="quiz_next_button">Siguiente</string>
@@ -29,6 +29,7 @@
     <string name="logo_description">App Logo</string>
 
     <!-- Help Activity -->
+    <string name="help_button_back">Entendido</string>
     <string name="manual_welcome_title">¡Bienvenido a Quizzy!</string>
     <string name="manual_welcome_text">
     ¡Gracias por descargar Quizzy! Esta aplicación está diseñada para poner a prueba tus conocimientos sobre la fórmula 1.
@@ -57,7 +58,4 @@
     <string name="manual_footer">
     ¡Esperamos que disfrutes de Quizzy! Si tienes alguna pregunta o sugerencia, no dudes en contactarnos.
     </string>
-
-
-
 </resources>

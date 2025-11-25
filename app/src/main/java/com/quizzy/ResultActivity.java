@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.quizzy.config.Constants;
 import com.quizzy.repositories.SQLiteService;
+import com.quizzy.utils.SoundPlayer;
 
 public class ResultActivity extends BaseActivity {
 
@@ -33,6 +34,7 @@ public class ResultActivity extends BaseActivity {
      * Called when the restart button is clicked. Restarts the quiz.
      */
     public void restartGame(View view) {
+        SoundPlayer.playSound(this, R.raw.cuak_sound);
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(ResultActivity.this, QuizActivity.class);
         startActivity(intent, options.toBundle());

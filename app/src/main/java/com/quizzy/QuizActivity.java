@@ -3,6 +3,7 @@ package com.quizzy;
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import com.quizzy.models.TextQuestion;
 import com.quizzy.repositories.QuestionRepository;
 import com.quizzy.repositories.SQLiteService;
 import com.quizzy.utils.RandomUtils;
+import com.quizzy.utils.SoundPlayer;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -32,6 +34,8 @@ public class QuizActivity extends BaseActivity {
 
     private TextView scoreTextView;
     private Button nextButton;
+
+    private MediaPlayer backgroundMusicPlayer;
 
     private SQLiteService sqliteService;
     private long questionCount;
@@ -44,6 +48,11 @@ public class QuizActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setActivityContent(R.layout.activity_quiz);
+
+        // Start background music
+        this.backgroundMusicPlayer = SoundPlayer.playBackgroundMusic(
+            this, R.raw.background_music
+        );
 
         // Reference UI elements
         this.scoreTextView = findViewById(R.id.scoreTextView);
@@ -134,6 +143,7 @@ public class QuizActivity extends BaseActivity {
      * @param view The view that was clicked.
      */
     public void restartGame(View view) {
+        this.backgroundMusicPlayer.stop();
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent, options.toBundle());
@@ -179,6 +189,7 @@ public class QuizActivity extends BaseActivity {
      */
     private void finishQuiz() {
         this.sqliteService.insertScore(score);
+        this.backgroundMusicPlayer.stop();
 
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(this, ResultActivity.class);

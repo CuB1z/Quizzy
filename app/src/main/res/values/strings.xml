@@ -16,6 +16,8 @@
     <!-- Result Activity -->
     <string name="result_text">Puntuación Final</string>
     <string name="result_score">%1$d</string>
+    <string name="max_score_text">Puntuación más Alta</string>
+    <string name="max_score">%1$d</string>
     <string name="result_play_again">Jugar de nuevo</string>
 
     <!-- Quiz Fragment -->

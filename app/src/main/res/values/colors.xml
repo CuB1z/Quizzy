@@ -4,6 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#f12a1f</color>
     <color name="red_700">#FFCDD2</color>
+    <color name="red_900">#991C1A</color>
     <color name="gray">#FF888888</color>
     <color name="gray_700">#FFEEEEEE</color>
 </resources>

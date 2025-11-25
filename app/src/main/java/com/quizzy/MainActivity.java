@@ -18,4 +18,11 @@ public class MainActivity extends BaseActivity {
         Intent intent = new Intent(MainActivity.this, QuizActivity.class);
         startActivity(intent, options.toBundle());
     }
+
+    public void HelpClick(View view) {
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
+        Intent intent = new Intent(MainActivity.this, HelpActivity.class);
+        startActivity(intent, options.toBundle());
+    }
+
 }

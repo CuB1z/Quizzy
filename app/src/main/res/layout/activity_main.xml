@@ -64,4 +64,14 @@
         android:textSize="24sp"
         android:onClick="onStart"/>
 
+    <Button
+        android:id="@+id/helpButton"
+        style="@style/AppButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/help_button"
+        android:textSize="24sp"
+        android:onClick="HelpClick"/>
+
 </LinearLayout>

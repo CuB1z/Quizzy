@@ -5,6 +5,7 @@
     <string name="start_title">Quizzy</string>
     <string name="start_subtitle">F1 Edition</string>
     <string name="start_quiz">Comenzar</string>
+    <string name="help_button">Ayuda</string>">
 
     <!-- Quiz Activity -->
     <string name="quiz_next_button">Siguiente</string>
@@ -24,4 +25,37 @@
 
     <!-- Content Descriptions -->
     <string name="logo_description">App Logo</string>
+
+    <!-- Help Activity -->
+    <string name="manual_welcome_title">¡Bienvenido a Quizzy!</string>
+    <string name="manual_welcome_text">
+    ¡Gracias por descargar Quizzy! Esta aplicación está diseñada para poner a prueba tus conocimientos sobre la fórmula 1.
+    Prepárate para desafiar tu mente, aprender cosas nuevas y divertirte.
+    Este manual te guiará a través de las funciones principales del juego.
+    </string>
+
+    <string name="manual_how_to_play_title">Cómo Jugar</string>
+    <string name="manual_how_to_play_text">
+    1.  **Selección de Categoría**: Desde la pantalla principal, elige una categoría de preguntas que te interese (por ejemplo, Historia, Ciencia, Cine, etc.).
+    \n2.  **Inicio del Quiz**: Una vez seleccionada la categoría, el quiz comenzará automáticamente. Se te presentará una pregunta con varias opciones de respuesta.
+    \n3.  **Respuesta**: Toca la opción que creas que es correcta. Una vez que selecciones una respuesta, no podrás cambiarla.
+    \n4.  **Retroalimentación**: Inmediatamente después de tu respuesta, el juego te indicará si fue correcta o incorrecta.
+    \n5.  **Siguiente Pregunta**: Toca el botón "Siguiente" o espera a que el tiempo avance a la siguiente pregunta.
+    \n6.  **Fin del Quiz**: El quiz terminará después de un número determinado de preguntas. Se mostrará tu puntuación final.
+    </string>
+
+    <string name="manual_scoring_title">Puntuación</string>
+    <string name="manual_scoring_text">
+    Tu puntuación se calcula en función del número de respuestas correctas que obtengas.
+    \nCada respuesta correcta suma 3 puntos a tu marcador.
+    \nLas respuestas incorrectas restan 2 puntos.
+    \n¡Intenta conseguir la puntuación más alta posible!
+    </string>
+
+    <string name="manual_footer">
+    ¡Esperamos que disfrutes de Quizzy! Si tienes alguna pregunta o sugerencia, no dudes en contactarnos.
+    </string>
+
+
+
 </resources>

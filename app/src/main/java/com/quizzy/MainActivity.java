@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.quizzy.utils.SoundPlayer;
+
 public class MainActivity extends BaseActivity {
 
     @Override
@@ -14,6 +16,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void onStart(View view) {
+        SoundPlayer.playSound(this, R.raw.cuak_sound);
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(MainActivity.this, QuizActivity.class);
         startActivity(intent, options.toBundle());

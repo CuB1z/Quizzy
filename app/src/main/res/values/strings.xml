@@ -29,33 +29,36 @@
     <string name="logo_description">App Logo</string>
 
     <!-- Help Activity -->
+    <!-- Help Activity -->
     <string name="help_button_back">Entendido</string>
+
     <string name="manual_welcome_title">¡Bienvenido a Quizzy!</string>
     <string name="manual_welcome_text">
-    ¡Gracias por descargar Quizzy! Esta aplicación está diseñada para poner a prueba tus conocimientos sobre la fórmula 1.
+    ¡Gracias por descargar Quizzy! Esta aplicación está diseñada para poner a prueba tus conocimientos sobre la Fórmula 1.
     Prepárate para desafiar tu mente, aprender cosas nuevas y divertirte.
     Este manual te guiará a través de las funciones principales del juego.
     </string>
 
     <string name="manual_how_to_play_title">Cómo Jugar</string>
     <string name="manual_how_to_play_text">
-    1.  **Selección de Categoría**: Desde la pantalla principal, elige una categoría de preguntas que te interese (por ejemplo, Historia, Ciencia, Cine, etc.).
-    \n2.  **Inicio del Quiz**: Una vez seleccionada la categoría, el quiz comenzará automáticamente. Se te presentará una pregunta con varias opciones de respuesta.
-    \n3.  **Respuesta**: Toca la opción que creas que es correcta. Una vez que selecciones una respuesta, no podrás cambiarla.
-    \n4.  **Retroalimentación**: Inmediatamente después de tu respuesta, el juego te indicará si fue correcta o incorrecta.
-    \n5.  **Siguiente Pregunta**: Toca el botón "Siguiente" o espera a que el tiempo avance a la siguiente pregunta.
-    \n6.  **Fin del Quiz**: El quiz terminará después de un número determinado de preguntas. Se mostrará tu puntuación final.
+    \n1. <b>Inicio</b>: En la pantalla principal toca el botón "Start". El quiz de Fórmula 1 empezará inmediatamente.
+    \n2. <b>Selección de Preguntas</b>: El juego carga 10 preguntas aleatorias de la base de datos. Pueden ser de distintos tipos: texto con opciones de texto, preguntas con imagen y respuestas de texto, o preguntas de texto con respuestas en imagen.
+    \n3. <b>Responder</b>: Elige la opción que consideres correcta. Una vez marcada, la respuesta queda bloqueada.
+    \n4. <b>Resultado</b>: Tras responder, verás al instante si has acertado o no.
+    \n5. <b>Avance</b>: Pulsa "Siguiente" para continuar con la siguiente pregunta.
+    \n6. <b>Final del Quiz</b>: Al terminar las 10 preguntas, podrás ver tu puntuación final.
     </string>
 
     <string name="manual_scoring_title">Puntuación</string>
     <string name="manual_scoring_text">
     Tu puntuación se calcula en función del número de respuestas correctas que obtengas.
-    \nCada respuesta correcta suma 3 puntos a tu marcador.
-    \nLas respuestas incorrectas restan 2 puntos.
+    \n<b>Cada respuesta correcta suma 3 puntos.</b>
+    \n<b>Las respuestas incorrectas restan 2 puntos.</b>
     \n¡Intenta conseguir la puntuación más alta posible!
     </string>
 
     <string name="manual_footer">
     ¡Esperamos que disfrutes de Quizzy! Si tienes alguna pregunta o sugerencia, no dudes en contactarnos.
     </string>
+
 </resources>

@@ -23,6 +23,7 @@ import com.quizzy.models.SpinnerAnswerQuestion;
 import com.quizzy.models.TextQuestion;
 import com.quizzy.repositories.QuestionRepository;
 import com.quizzy.repositories.SQLiteService;
+import com.quizzy.utils.GameTimer;
 import com.quizzy.utils.RandomUtils;
 import com.quizzy.utils.SoundPlayer;
 
@@ -33,9 +34,11 @@ public class QuizActivity extends BaseActivity {
     private final int MAX_QUESTIONS = QuestionRepository.MAX_QUESTIONS;
 
     private TextView scoreTextView;
+    private TextView timerTextView;
     private Button nextButton;
 
     private MediaPlayer backgroundMusicPlayer;
+    private GameTimer gameTimer;
 
     private SQLiteService sqliteService;
     private long questionCount;
@@ -57,6 +60,7 @@ public class QuizActivity extends BaseActivity {
         // Reference UI elements
         this.scoreTextView = findViewById(R.id.scoreTextView);
         this.nextButton = findViewById(R.id.nextButton);
+        this.timerTextView = findViewById(R.id.timerTextView);
 
         this.sqliteService = new SQLiteService(this);
         this.questionCount = this.sqliteService.getQuestionCount();
@@ -64,6 +68,18 @@ public class QuizActivity extends BaseActivity {
             this.sqliteService.insertBatchQuestions(QuestionRepository.getQuestions());
             this.questionCount = this.sqliteService.getQuestionCount();
         }
+
+        // Initialize and start game timer (tick every 1s)
+        this.gameTimer = new GameTimer(1000);
+        this.gameTimer.setListener(elapsedMillis -> runOnUiThread(() -> {
+            if (timerTextView != null) {
+                timerTextView.setText(
+                    GameTimer.formatTime(elapsedMillis)
+                );
+            }
+        }));
+        this.gameTimer.start();
+
         updateScore();
         loadQuestion();
     }
@@ -144,6 +160,11 @@ public class QuizActivity extends BaseActivity {
      */
     public void restartGame(View view) {
         this.backgroundMusicPlayer.stop();
+
+        if (this.gameTimer != null && this.gameTimer.isRunning()) {
+            this.gameTimer.stop();
+        }
+
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent, options.toBundle());
@@ -190,6 +211,10 @@ public class QuizActivity extends BaseActivity {
     private void finishQuiz() {
         this.sqliteService.insertScore(score);
         this.backgroundMusicPlayer.stop();
+
+        if (this.gameTimer != null && this.gameTimer.isRunning()) {
+            this.gameTimer.stop();
+        }
 
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(this, ResultActivity.class);

@@ -5,7 +5,10 @@ import android.content.ContentValues;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -117,13 +120,52 @@ public class PhotoActivity extends BaseActivity {
 
     private void processAndSaveImage(File photoFile) {
         Bitmap bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-        Matrix matrix = new Matrix();
-        matrix.postRotate(90);
-        Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0,
-                bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
-        saveBitmapToGallery(rotatedBitmap);
+        // --- 1. Cargamos el marco PNG ---
+        Bitmap overlay = BitmapFactory.decodeResource(getResources(), R.drawable.marco);
+
+        // --- 2. Escalamos el marco al tamaño exacto de la foto ---
+        Bitmap scaledOverlay = Bitmap.createScaledBitmap(
+                overlay,
+                bitmap.getWidth(),
+                bitmap.getHeight(),
+                true
+        );
+
+        // --- 3. Creamos un bitmap final donde dibujar todo ---
+        Bitmap finalBitmap = Bitmap.createBitmap(
+                bitmap.getWidth(),
+                bitmap.getHeight(),
+                Bitmap.Config.ARGB_8888
+        );
+
+        Canvas canvas = new Canvas(finalBitmap);
+
+        // 1️⃣ Dibuja la foto original
+        canvas.drawBitmap(bitmap, 0, 0, null);
+
+        // 2️⃣ Dibuja el marco encima
+        canvas.drawBitmap(scaledOverlay, 0, 0, null);
+
+        // 3️⃣ Escribe el texto del tiempo
+        Paint paint = new Paint();
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(bitmap.getWidth() * 0.05f); // Tamaño relativo
+        paint.setShadowLayer(8f, 0f, 0f, Color.BLACK);
+        paint.setAntiAlias(true);
+
+        // Posición del texto (abajo a la derecha)
+        String texto = "Tiempo: " + "03:00";
+        float x = bitmap.getWidth() * 0.05f;
+        float y = bitmap.getHeight() - bitmap.getHeight() * 0.05f;
+
+        canvas.drawText(texto, x, y, paint);
+
+        // Guardar la imagen final
+        saveBitmapToGallery(finalBitmap);
     }
+
+// ----------------------------------------------------------
 
     private void saveBitmapToGallery(Bitmap bitmap) {
         ContentValues values = new ContentValues();

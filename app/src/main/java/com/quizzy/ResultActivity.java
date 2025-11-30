@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.quizzy.config.Constants;
 import com.quizzy.repositories.SQLiteService;
+import com.quizzy.utils.GameTimer;
 import com.quizzy.utils.SoundPlayer;
 
 public class ResultActivity extends BaseActivity {
@@ -52,6 +53,8 @@ public class ResultActivity extends BaseActivity {
         SoundPlayer.playSound(this, R.raw.cuak_sound);
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(ResultActivity.this, PhotoActivity.class);
+        //intent.putExtra(Constants.FINAL_SCORE, timer);
+        //intent.putExtra(Constants.TIMER_VALUE, GameTimer.formatTime(elapsedMillis));
         startActivity(intent, options.toBundle());
         finish();
     }

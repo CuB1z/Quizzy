@@ -20,15 +20,21 @@ public class ResultActivity extends BaseActivity {
         // Reference UI elements
         TextView scoreText = findViewById(R.id.finalScoreText);
         TextView maxScoreText = findViewById(R.id.maxScoreText);
+        TextView timerTextView = findViewById(R.id.timerTextView);
+
 
         SQLiteService sqLiteService = new SQLiteService(this);
 
         // Get final score from intent and display it
         int finalScore = getIntent().getIntExtra(Constants.FINAL_SCORE, 0);
+        String timerValue = getIntent().getStringExtra(Constants.TIMER_VALUE);
         int maxScore = sqLiteService.getMaxScore();
 
         scoreText.setText(getString(R.string.result_score, finalScore));
         maxScoreText.setText(getString(R.string.max_score, maxScore));
+        timerTextView.setText(getString(R.string.timer, timerValue));
+
+
     }
 
     /**
@@ -41,4 +47,13 @@ public class ResultActivity extends BaseActivity {
         startActivity(intent, options.toBundle());
         finish();
     }
+
+    public void navigatePhotoActivity(View view) {
+        SoundPlayer.playSound(this, R.raw.cuak_sound);
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
+        Intent intent = new Intent(ResultActivity.this, PhotoActivity.class);
+        startActivity(intent, options.toBundle());
+        finish();
+    }
+
 }

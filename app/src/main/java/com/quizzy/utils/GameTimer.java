@@ -62,4 +62,12 @@ public class GameTimer {
         long sec = seconds % 60;
         return String.format(Locale.US, "%02d:%02d", min, sec);
     }
+
+    public long getElapsedMillis() {
+        if (running) {
+            return SystemClock.elapsedRealtime() - startTime + accumulatedBeforeStart;
+        } else {
+            return accumulatedBeforeStart;
+        }
+    }
 }

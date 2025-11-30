@@ -19,7 +19,10 @@
     <string name="result_score">%1$d</string>
     <string name="max_score_text">Puntuación más Alta</string>
     <string name="max_score">%1$d</string>
+    <string name="timer">tiempo: %1$s</string>
     <string name="result_play_again">Jugar de nuevo</string>
+    <string name="result_take_photo">Tomar Foto</string>
+
 
     <!-- Quiz Fragment -->
     <string name="question_image_description">Imagen de la pregunta</string>

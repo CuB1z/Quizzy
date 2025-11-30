@@ -209,6 +209,9 @@ public class QuizActivity extends BaseActivity {
      * Finishes the quiz and navigates to the ResultActivity.
      */
     private void finishQuiz() {
+
+        long elapsedMillis = this.gameTimer.getElapsedMillis();
+
         this.sqliteService.insertScore(score);
         this.backgroundMusicPlayer.stop();
 
@@ -219,6 +222,7 @@ public class QuizActivity extends BaseActivity {
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra(Constants.FINAL_SCORE, score);
+        intent.putExtra(Constants.TIMER_VALUE, GameTimer.formatTime(elapsedMillis));
         startActivity(intent, options.toBundle());
         finish();
     }

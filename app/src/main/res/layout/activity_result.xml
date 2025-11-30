@@ -108,4 +108,23 @@
         android:onClick="restartGame"
         android:text="@string/result_play_again" />
 
+    <Button
+        android:id="@+id/takePhotoButton"
+        style="@style/AppButton"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:onClick="navigatePhotoActivity"
+        android:text="@string/result_take_photo" />
+
+
+    <TextView
+        android:id="@+id/timerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/timer"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
 </LinearLayout>

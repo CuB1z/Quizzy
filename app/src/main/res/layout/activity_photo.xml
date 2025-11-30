@@ -19,11 +19,12 @@
         style="@style/AppButton"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:onClick="navigatePhotoActivity"
+        android:onClick="takePhotoButtonClicked"
         android:text="@string/result_take_photo"
         app:layout_constraintTop_toBottomOf="@id/cameraPreview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,9 @@
 package com.quizzy;
 
 import android.Manifest;
+import android.app.ActivityOptions;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,6 +29,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import com.quizzy.config.Constants;
+import com.quizzy.utils.SoundPlayer;
 
 import java.io.File;
 import java.io.OutputStream;
@@ -141,21 +145,22 @@ public class PhotoActivity extends BaseActivity {
 
         Canvas canvas = new Canvas(finalBitmap);
 
-        // 1️⃣ Dibuja la foto original
+        // Dibuja la foto original
         canvas.drawBitmap(bitmap, 0, 0, null);
 
-        // 2️⃣ Dibuja el marco encima
+        // Dibuja el marco encima
         canvas.drawBitmap(scaledOverlay, 0, 0, null);
 
-        // 3️⃣ Escribe el texto del tiempo
+        // Escribe el texto del tiempo
         Paint paint = new Paint();
         paint.setColor(Color.WHITE);
-        paint.setTextSize(bitmap.getWidth() * 0.05f); // Tamaño relativo
+        paint.setTextSize(bitmap.getWidth() * 0.05f);
         paint.setShadowLayer(8f, 0f, 0f, Color.BLACK);
         paint.setAntiAlias(true);
 
-        // Posición del texto (abajo a la derecha)
-        String texto = "Tiempo: " + "03:00";
+        String timerValue = getIntent().getStringExtra(Constants.TIMER_VALUE);
+
+        String texto = "Tiempo: " + timerValue ;
         float x = bitmap.getWidth() * 0.05f;
         float y = bitmap.getHeight() - bitmap.getHeight() * 0.05f;
 
@@ -163,6 +168,8 @@ public class PhotoActivity extends BaseActivity {
 
         // Guardar la imagen final
         saveBitmapToGallery(finalBitmap);
+        restartGame(null);
+
     }
 
 // ----------------------------------------------------------
@@ -178,10 +185,20 @@ public class PhotoActivity extends BaseActivity {
             OutputStream out = getContentResolver().openOutputStream(uri);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.close();
-            Toast.makeText(this, "Foto guardada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Foto guardada en /DCIM/Quizzy", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Error al guardar la foto", Toast.LENGTH_SHORT).show();
         }
     }
+    public void restartGame(View view) {
+        SoundPlayer.playSound(this, R.raw.cuak_sound);
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
+        Intent intent = new Intent(PhotoActivity.this, MainActivity.class);
+        startActivity(intent, options.toBundle());
+        finish();
+    }
 }
+
+
+

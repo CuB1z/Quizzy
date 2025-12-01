@@ -13,6 +13,9 @@ import com.quizzy.utils.SoundPlayer;
 
 public class ResultActivity extends BaseActivity {
 
+    private String timerValue;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +31,7 @@ public class ResultActivity extends BaseActivity {
 
         // Get final score from intent and display it
         int finalScore = getIntent().getIntExtra(Constants.FINAL_SCORE, 0);
-        String timerValue = getIntent().getStringExtra(Constants.TIMER_VALUE);
+        timerValue = getIntent().getStringExtra(Constants.TIMER_VALUE);
         int maxScore = sqLiteService.getMaxScore();
 
         scoreText.setText(getString(R.string.result_score, finalScore));
@@ -52,11 +55,13 @@ public class ResultActivity extends BaseActivity {
     public void navigatePhotoActivity(View view) {
         SoundPlayer.playSound(this, R.raw.cuak_sound);
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
+
         Intent intent = new Intent(ResultActivity.this, PhotoActivity.class);
-        //intent.putExtra(Constants.FINAL_SCORE, timer);
-        //intent.putExtra(Constants.TIMER_VALUE, GameTimer.formatTime(elapsedMillis));
+        intent.putExtra(Constants.TIMER_VALUE, timerValue);
+
         startActivity(intent, options.toBundle());
         finish();
     }
+
 
 }

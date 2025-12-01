@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.quizzy.config.Constants;
 import com.quizzy.repositories.SQLiteService;
-import com.quizzy.utils.GameTimer;
 import com.quizzy.utils.SoundPlayer;
 
 public class ResultActivity extends BaseActivity {
@@ -24,8 +23,6 @@ public class ResultActivity extends BaseActivity {
         // Reference UI elements
         TextView scoreText = findViewById(R.id.finalScoreText);
         TextView maxScoreText = findViewById(R.id.maxScoreText);
-        TextView timerTextView = findViewById(R.id.timerTextView);
-
 
         SQLiteService sqLiteService = new SQLiteService(this);
 
@@ -36,9 +33,6 @@ public class ResultActivity extends BaseActivity {
 
         scoreText.setText(getString(R.string.result_score, finalScore));
         maxScoreText.setText(getString(R.string.max_score, maxScore));
-        timerTextView.setText(getString(R.string.timer, timerValue));
-
-
     }
 
     /**

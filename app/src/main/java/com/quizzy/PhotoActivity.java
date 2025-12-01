@@ -11,10 +11,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -27,6 +27,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.exifinterface.media.ExifInterface;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.quizzy.config.Constants;
@@ -44,7 +45,6 @@ public class PhotoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setActivityContent(R.layout.activity_photo);
-
         checkCameraPermission();
     }
 
@@ -62,14 +62,17 @@ public class PhotoActivity extends BaseActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(
+        int requestCode, @NonNull String[] permissions,
+        @NonNull int[] grantResults
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == CAMERA_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startCamera();
             } else {
                 Toast.makeText(this, "Se necesita permiso de cámara", Toast.LENGTH_SHORT).show();
+                restartGame(null);
             }
         }
     }
@@ -86,8 +89,8 @@ public class PhotoActivity extends BaseActivity {
                 preview.setSurfaceProvider(previewView.getSurfaceProvider());
 
                 imageCapture = new ImageCapture.Builder()
-                        .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
-                        .build();
+                    .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+                    .build();
 
                 CameraSelector cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA;
 
@@ -95,7 +98,7 @@ public class PhotoActivity extends BaseActivity {
                 cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture);
 
             } catch (Exception e) {
-                Log.e("CameraX", "Error al iniciar la cámara", e);
+                System.exit(0);
             }
         }, ContextCompat.getMainExecutor(this));
     }
@@ -109,70 +112,113 @@ public class PhotoActivity extends BaseActivity {
                 new ImageCapture.OutputFileOptions.Builder(photoFile).build();
 
         imageCapture.takePicture(outputOptions, ContextCompat.getMainExecutor(this),
-                new ImageCapture.OnImageSavedCallback() {
-                    @Override
-                    public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
-                        processAndSaveImage(photoFile);
-                    }
+            new ImageCapture.OnImageSavedCallback() {
+                @Override
+                public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
+                    processAndSaveImage(photoFile);
+                }
 
-                    @Override
-                    public void onError(@NonNull ImageCaptureException exception) {
-                        Log.e("CameraX", "Error al tomar la foto", exception);
+                @Override
+                public void onError(@NonNull ImageCaptureException exception) {
+                    // Do nothing
+                }
+            });
+    }
+
+    private Bitmap fixOrientation(String path, Bitmap bitmap) {
+        try {
+            ExifInterface exif = new ExifInterface(path);
+            int orientation = exif.getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_UNDEFINED
+            );
+
+            Matrix matrix = new Matrix();
+
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    matrix.postRotate(90);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    matrix.postRotate(180);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    matrix.postRotate(270);
+                    break;
+                case ExifInterface.ORIENTATION_UNDEFINED:
+                    if (bitmap.getWidth() > bitmap.getHeight()) {
+                        matrix.postRotate(90);
                     }
-                });
+                    break;
+                default:
+                    return bitmap;
+            }
+
+            return Bitmap.createBitmap(
+                bitmap,
+                0, 0,
+                bitmap.getWidth(),
+                bitmap.getHeight(),
+                matrix,
+                true
+            );
+
+        } catch (Exception e) {
+            return bitmap;
+        }
     }
 
     private void processAndSaveImage(File photoFile) {
-        Bitmap bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+        Bitmap photoBitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+        photoBitmap = fixOrientation(photoFile.getAbsolutePath(), photoBitmap);
 
-        // --- 1. Cargamos el marco PNG ---
+        // Load the overlay frame from resources
         Bitmap overlay = BitmapFactory.decodeResource(getResources(), R.drawable.marco);
 
-        // --- 2. Escalamos el marco al tamaño exacto de la foto ---
+        // Scale overlay to match photo dimensions
         Bitmap scaledOverlay = Bitmap.createScaledBitmap(
-                overlay,
-                bitmap.getWidth(),
-                bitmap.getHeight(),
-                true
+            overlay,
+            photoBitmap.getWidth(),
+            photoBitmap.getHeight(),
+            true
         );
 
-        // --- 3. Creamos un bitmap final donde dibujar todo ---
+        // Create a new bitmap with the same dimensions as the photo
         Bitmap finalBitmap = Bitmap.createBitmap(
-                bitmap.getWidth(),
-                bitmap.getHeight(),
-                Bitmap.Config.ARGB_8888
+            photoBitmap.getWidth(),
+            photoBitmap.getHeight(),
+            Bitmap.Config.ARGB_8888
         );
 
         Canvas canvas = new Canvas(finalBitmap);
 
-        // Dibuja la foto original
-        canvas.drawBitmap(bitmap, 0, 0, null);
+        // Draw the original photo
+        canvas.drawBitmap(photoBitmap, 0, 0, null);
 
-        // Dibuja el marco encima
+        // Draw the overlay frame
         canvas.drawBitmap(scaledOverlay, 0, 0, null);
 
-        // Escribe el texto del tiempo
+        // Add time to the photo
         Paint paint = new Paint();
-        paint.setColor(Color.WHITE);
-        paint.setTextSize(bitmap.getWidth() * 0.05f);
+        paint.setColor(Color.YELLOW);
+        paint.setTypeface(Typeface.create(Typeface.MONOSPACE, Typeface.BOLD));
+        paint.setTextSize(photoBitmap.getWidth() * 0.05f);
         paint.setShadowLayer(8f, 0f, 0f, Color.BLACK);
         paint.setAntiAlias(true);
 
         String timerValue = getIntent().getStringExtra(Constants.TIMER_VALUE);
+        String text = String.format("%s", timerValue);
 
-        String texto = "Tiempo: " + timerValue ;
-        float x = bitmap.getWidth() * 0.05f;
-        float y = bitmap.getHeight() - bitmap.getHeight() * 0.05f;
+        float x = photoBitmap.getWidth() * 0.5f - paint.measureText(text) * 0.5f;
+        float y = photoBitmap.getHeight() - photoBitmap.getHeight() * 0.25f;
 
-        canvas.drawText(texto, x, y, paint);
+        canvas.drawText(text, x, y, paint);
 
-        // Guardar la imagen final
+        // Save final bitmap to gallery
         saveBitmapToGallery(finalBitmap);
         restartGame(null);
 
     }
-
-// ----------------------------------------------------------
 
     private void saveBitmapToGallery(Bitmap bitmap) {
         ContentValues values = new ContentValues();
@@ -182,12 +228,15 @@ public class PhotoActivity extends BaseActivity {
 
         try {
             Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            assert uri != null;
+
             OutputStream out = getContentResolver().openOutputStream(uri);
+            assert out != null;
+
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.close();
             Toast.makeText(this, "Foto guardada en /DCIM/Quizzy", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            e.printStackTrace();
             Toast.makeText(this, "Error al guardar la foto", Toast.LENGTH_SHORT).show();
         }
     }

@@ -32,11 +32,12 @@ android {
 }
 
 dependencies {
-    implementation("com.airbnb.android:lottie:6.6.10")
+    implementation(libs.lottie)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.exifinterface)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

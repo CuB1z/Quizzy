@@ -23,6 +23,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void helpClick(View view) {
+        SoundPlayer.playSound(this, R.raw.cuak_sound);
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
         Intent intent = new Intent(MainActivity.this, HelpActivity.class);
         startActivity(intent, options.toBundle());

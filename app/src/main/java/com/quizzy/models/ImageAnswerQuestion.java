@@ -8,7 +8,6 @@ public class ImageAnswerQuestion extends Question{
         public ImageAnswerQuestion(String questionText, List<String> options, int correctOptionIndex, List<Integer> imageAnswers){
             super(questionText, options, correctOptionIndex);
             this.imageAnswers = imageAnswers;
-
         }
 
         @Override

@@ -30,11 +30,12 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_margin="4dp"
             android:clickable="true"
             android:focusable="true"
             android:padding="0dp"
-            android:layout_margin="4dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/image2"
@@ -42,11 +43,12 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_margin="4dp"
             android:clickable="true"
             android:focusable="true"
             android:padding="0dp"
-            android:layout_margin="4dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/image3"
@@ -54,11 +56,12 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_margin="4dp"
             android:clickable="true"
             android:focusable="true"
             android:padding="0dp"
-            android:layout_margin="4dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/image4"
@@ -70,7 +73,8 @@
             android:clickable="true"
             android:focusable="true"
             android:padding="0dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck" />
 
     </GridLayout>
 

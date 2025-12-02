@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Quizzy</string>
 
     <!-- Main Activity -->
@@ -42,7 +42,7 @@
     </string>
 
     <string name="manual_how_to_play_title">Cómo Jugar</string>
-    <string name="manual_how_to_play_text">
+    <string name="manual_how_to_play_text" tools:ignore="Typos">
     \n1. <b>Inicio</b>: En la pantalla principal toca el botón "Start". El quiz de Fórmula 1 empezará inmediatamente.
     \n2. <b>Selección de Preguntas</b>: El juego carga 10 preguntas aleatorias de la base de datos. Pueden ser de distintos tipos: texto con opciones de texto, preguntas con imagen y respuestas de texto, o preguntas de texto con respuestas en imagen.
     \n3. <b>Responder</b>: Elige la opción que consideres correcta. Una vez marcada, la respuesta queda bloqueada.
